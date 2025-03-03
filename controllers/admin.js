@@ -10,12 +10,16 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
+  const imageURL = req.body.imageURL;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product(null, title, imageUrl, description, price);
-  product.save();
-  res.redirect('/');
+  const product = new Product(null, title, imageURL, description, price);
+  product
+    .save()
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch(err => console.log(err));
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -41,12 +45,12 @@ exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
-  const updatedImageUrl = req.body.imageUrl;
+  const updatedimageURL = req.body.imageURL;
   const updatedDesc = req.body.description;
   const updatedProduct = new Product(
     prodId,
     updatedTitle,
-    updatedImageUrl,
+    updatedimageURL,
     updatedDesc,
     updatedPrice
   );
