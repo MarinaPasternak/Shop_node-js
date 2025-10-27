@@ -1,5 +1,5 @@
 #  Shop APP
-This is a simple ship app.
+This is a simple shop app.
 
 ## Pages
 - Shop - main page
