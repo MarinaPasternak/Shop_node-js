@@ -58,6 +58,7 @@ sequelize
     return user.createCart();
   })
   .then(user => {
+    console.log("Run on port 3001");
     app.listen(3001);
   })
   .catch(err => {

@@ -96,20 +96,23 @@ exports.postCart = (req, res, next) => {
     let newQuantity = 1;
 
     if (product) {
-
+      const oldQuantity = product.cartItem.quantity;
+      newQuantity = oldQuantity + 1;
+      return product;
     }
 
-    return Product
-      .findByPk(prodId)
-      .then(product => {
-          return fetcedhCart.addProduct(product, {
-            through: { quantity: newQuantity }
-          });
-      })
-      .catch(err => console.log(err))
+    return Product.findByPk(prodId)   
   })
-  .catch(err => {
-    console.log(err);
+  .then(product => {
+    return fetcedhCart.addProduct(product, {
+      through: { quantity: newQuantity }
+    });
+  })
+  .then(() => {
+    res.redirect('./cart')
+  })
+  .catch(error => {
+    console.log(error);
   });
 };
 
